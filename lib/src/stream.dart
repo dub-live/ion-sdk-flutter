@@ -28,16 +28,19 @@ class Stream extends EventEmitter {
         this._stream = await navigator
             .getDisplayMedia(_buildMediaConstraints(false, true));
       } else {
-        Map<String, dynamic> videoConstrains = {
-          "mandatory": {
-            "minWidth": resolutions[quality]['width'],
-            "minHeight": resolutions[quality]['height'],
-            "minFrameRate": '30',
-          },
-          "facingMode": 'user',
-        };
+        dynamic videoConstraints;
+        if (video) {
+          videoConstraints = {
+            "mandatory": {
+              "minWidth": resolutions[quality]['width'],
+              "minHeight": resolutions[quality]['height'],
+              "minFrameRate": '30',
+            },
+            "facingMode": 'user',
+          };
+        }
         this._stream = await navigator
-            .getUserMedia(_buildMediaConstraints(audio, videoConstrains));
+            .getUserMedia(_buildMediaConstraints(audio, videoConstraints));
       }
     }
   }
