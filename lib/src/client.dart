@@ -133,7 +133,7 @@ class Client extends EventEmitter {
             'video': video,
             'screen': screen,
             'codec': codec,
-            'bandwidth': int.parse(bandwidth),
+            'bandwidth': bandwidth is int ? bandwidth : int.parse(bandwidth),
             'resolution': resolution,
           };
           var result = await this._protoo.send('publish',
@@ -199,7 +199,7 @@ class Client extends EventEmitter {
       }
     );
 
-     
+
     var options = {
       'codec': codec,
       'bandwidth': int.parse(bandwidth),
